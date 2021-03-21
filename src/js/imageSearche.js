@@ -31,6 +31,7 @@ function loadMoreBtnHandler() {
   servise.fetcArticles().then(hits => {
     const markup = buildListItemsTemplate(hits);
     iserListItems(markup);
+    onScrollDisplay();
     window.scrollTo(0, 1000);
 
     window.scrollTo({
