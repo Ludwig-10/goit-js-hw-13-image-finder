@@ -25,6 +25,7 @@ function imageSearchInputHandler(e) {
     iserListItems(markup);
   });
   input.value = '';
+  refs.loadMoreBtn.classList.remove('is-hidden');
 }
 
 function loadMoreBtnHandler() {
