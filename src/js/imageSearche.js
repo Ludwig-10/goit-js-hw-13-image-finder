@@ -18,7 +18,7 @@ function imageSearchInputHandler(e) {
   clearListItems();
 
   servise.resetPage();
-  servise.searchQuerry = input.value;
+  servise.searchQuerry = input.value.trim();
 
   servise.fetcArticles().then(hits => {
     const markup = buildListItemsTemplate(hits);
@@ -32,8 +32,8 @@ function loadMoreBtnHandler() {
 servise.fetcArticles().then(hits => {
     const markup = buildListItemsTemplate(hits);
     iserListItems(markup);  
-    const viewportHeightScroll = document.querySelector('.gallery').offsetHeight;
-    window.scrollTo(0, viewportHeightScroll);
+    const HeightScroll = document.querySelector('.gallery').offsetHeight;
+    window.scrollTo(0, HeightScroll);
   });
 }
 function iserListItems(items) {
