@@ -6,7 +6,7 @@ import refs from './refs';
 
 
 refs.searchForm.addEventListener('submit', imageSearchInputHandler);
-refs.loadMoreBtn.addEventListener('click', loadMoreBtnHandler);
+
 
 function imageSearchInputHandler(e) {
 
@@ -27,18 +27,13 @@ function imageSearchInputHandler(e) {
   input.value = '';
   refs.loadMoreBtn.classList.remove('is-hidden');
 }
-
+refs.loadMoreBtn.addEventListener('click', loadMoreBtnHandler);
 function loadMoreBtnHandler() {
-  servise.fetcArticles().then(hits => {
+servise.fetcArticles().then(hits => {
     const markup = buildListItemsTemplate(hits);
-    iserListItems(markup);
-    onScrollDisplay();
-    window.scrollTo(0, 1000);
-
-    window.scrollTo({
-      top: 1000,
-      behavior: 'smooth',
-    });
+    iserListItems(markup);  
+    const viewportHeightScroll = document.querySelector('.gallery').offsetHeight;
+    window.scrollTo(0, viewportHeightScroll);
   });
 }
 function iserListItems(items) {
