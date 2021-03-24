@@ -21,8 +21,7 @@ function imageSearchInputHandler(e) {
   servise.resetPage();
 
   servise.searchQuerry = input.value.trim();
-  const query = event.currentTarget.elements.query.value.trim();
-  if(!query)  return alert({
+  if(!servise.searchQuerry)  return alert({
     text: 'Please enter valid name',
     delay: 1000,
   });
