@@ -1,7 +1,7 @@
 import servise from './apiService';
 import cardImeges from '../templates/imageCard.hbs';
 import 'material-design-icons/iconfont/material-icons.css';
-
+import { Stack, alert, error } from '@pnotify/core';
 import refs from './refs';
 
 
@@ -18,7 +18,13 @@ function imageSearchInputHandler(e) {
   clearListItems();
 
   servise.resetPage();
+
   servise.searchQuerry = input.value.trim();
+  const query = event.currentTarget.elements.query.value.trim();
+  if(!query)  return alert({
+    text: 'Please enter valid name',
+    delay: 1000,
+  });
 
   servise.fetcArticles().then(hits => {
     const markup = buildListItemsTemplate(hits);
@@ -29,13 +35,18 @@ function imageSearchInputHandler(e) {
 }
 refs.loadMoreBtn.addEventListener('click', loadMoreBtnHandler);
 function loadMoreBtnHandler() {
-servise.fetcArticles().then(hits => {
-    const markup = buildListItemsTemplate(hits);
-    iserListItems(markup);  
-    const HeightScroll = document.querySelector('.gallery').offsetHeight;
-    window.scrollTo(0, HeightScroll);
-  });
-}
+  servise.fetcArticles().then(hits => {
+  const scrollY = refs.gallery.offsetTop + refs.gallery.clientHeight;
+      const markup = buildListItemsTemplate(hits);
+      iserListItems(markup);
+      const HeightScroll = document.querySelector('.gallery');
+      window.scrollTo(0, HeightScroll);
+  window.scrollTo({
+      top: scrollY,
+      behavior: 'smooth',
+    });
+    });
+  }
 function iserListItems(items) {
   refs.gallery.insertAdjacentHTML('beforeend', items);
 }
