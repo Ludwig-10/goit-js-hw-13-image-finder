@@ -1,7 +1,8 @@
 import servise from './apiService';
 import cardImeges from '../templates/imageCard.hbs';
 import 'material-design-icons/iconfont/material-icons.css';
-import { Stack, alert, error } from '@pnotify/core';
+import { alert, defaultModules } from '@pnotify/core';
+import '@pnotify/core/dist/BrightTheme.css';
 import refs from './refs';
 
 
